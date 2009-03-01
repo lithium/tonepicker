@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    >
+    <ImageView android:id="@+id/picker_item_icon"
+			android:layout_height="32sp"
+			android:layout_width="32sp"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="8sp"
+		/>	
+    <TextView android:id="@+id/picker_item_text"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/picker_item_icon"
+			android:layout_centerVertical="true"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:paddingLeft="8sp"
+			android:singleLine="true"
+    />
+    <TextView android:id="@+id/picker_item_info"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/picker_item_icon"
+      android:layout_alignParentBottom="true"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:paddingLeft="16sp"
+			android:singleLine="true"
+    />
+</RelativeLayout>

@@ -1,3 +1,5 @@
 TonePicker Ringtone Chooser
 
 
+Intent { action=android.intent.action.RINGTONE_PICKER comp={android/com.android.internal.app.RingtonePickerActivity} (has extras) }
+
