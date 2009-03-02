@@ -25,9 +25,15 @@ import android.widget.ImageView;
 import android.net.Uri;
 import android.provider.Settings;
 
+import android.app.AlertDialog;
+import android.view.Menu;
+import android.view.MenuItem;
+
 public class TonePicker extends ListActivity
 {
     public static final int REQUEST_GET_CONTENT=1;
+
+    private MenuItem mAboutItem;
 
     private PackageManager mPackageManager;
     private Intent mIntent, mInitialIntent;
@@ -195,5 +201,28 @@ public class TonePicker extends ListActivity
         return list;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        mAboutItem = menu.add(0, 0, 0, R.string.about);
+        mAboutItem.setIcon(android.R.drawable.ic_menu_info_details);
+ 
+        return true;
+    }
+ 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.equals(mAboutItem)) {
+                View v = getLayoutInflater().inflate(R.layout.about_dialog,null);
+                AlertDialog dia = new AlertDialog.Builder(this).
+                                    setTitle(R.string.about_title).
+                                    setView(v).
+                                    setPositiveButton(R.string.splash_button_ok_label,null).
+                                    create();
+                dia.show();
+        }
+ 
+        return false;
+    }
 
 }

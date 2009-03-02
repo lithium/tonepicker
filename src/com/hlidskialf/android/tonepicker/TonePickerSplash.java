@@ -1,6 +1,7 @@
 package com.hlidskialf.android.tonepicker;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -14,6 +15,9 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.view.Menu;
+import android.view.MenuItem;
+
 
 public class TonePickerSplash extends Activity
 {
@@ -21,6 +25,7 @@ public class TonePickerSplash extends Activity
 
     private AudioManager mManager;
     private MediaPlayer mPlayer;
+    private MenuItem mAboutItem;
 
     @Override
     public void onPause() {
@@ -113,8 +118,6 @@ public class TonePickerSplash extends Activity
              }
         });
     }
-
-
     private static int volumeToProgress(AudioManager mgr, int stream)
     {
         return (int)(((float)mgr.getStreamVolume(stream) / (float)mgr.getStreamMaxVolume(stream)) * 100);
@@ -123,4 +126,31 @@ public class TonePickerSplash extends Activity
     {
         return (int)((float)mgr.getStreamMaxVolume(stream) *( (float)progress/(float)100));
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        mAboutItem = menu.add(0, 0, 0, R.string.about);
+        mAboutItem.setIcon(android.R.drawable.ic_menu_info_details);
+ 
+        return true;
+    }
+ 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.equals(mAboutItem)) {
+                View v = getLayoutInflater().inflate(R.layout.about_dialog,null);
+                AlertDialog dia = new AlertDialog.Builder(this).
+                                    setTitle(R.string.about_title).
+                                    setView(v).
+                                    setPositiveButton(R.string.splash_button_ok_label,null).
+                                    create();
+                dia.show();
+        }
+ 
+        return false;
+    }
+ 
+
 }
