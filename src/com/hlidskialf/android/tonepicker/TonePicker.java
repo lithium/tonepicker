@@ -146,6 +146,7 @@ public class TonePicker extends ListActivity
 
           i.setComponent( new ComponentName(ri.activityInfo.applicationInfo.packageName, ri.activityInfo.name) );
           startActivityForResult(i, REQUEST_GET_CONTENT);
+          return;
         }
 
         Uri uri = null;
@@ -157,7 +158,6 @@ public class TonePicker extends ListActivity
         else if (cls.equals(String.class)) {
           uri = null;
         }
-
         finishWithUri(uri);
 
     }

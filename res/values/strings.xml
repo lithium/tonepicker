@@ -3,7 +3,7 @@
 
     <string name="app_name">Tone Picker</string>
     <string name="app_description">MP3 Ringtone Picker</string>
-    <string name="app_version">0.9.2</string>
+    <string name="app_version">0.9.2.1</string>
     <string name="splash_title">Tone Picker v%s</string>
     <string name="splash_body">When applications need a ringtone they call RINGTONE PICKER.  Use Tone Picker to set Music/MP3s for SMS, IM, Email, Ringtone, Notification, Alarms, Calendar,  whatever.</string>
     <string name="app_about"><b>Based heavily on Rings Extended</b>\nwritten by <u>Dianne Hackborn</u>\n\n
