@@ -36,7 +36,8 @@ public class TonePicker extends ListActivity
     private MenuItem mAboutItem;
 
     private PackageManager mPackageManager;
-    private Intent mIntent, mInitialIntent;
+    private Intent mContentIntent, mPickerIntent, mInitialIntent;
+    private int mFirstPickerPos;
     private ArrayList<Object> mList;
     private boolean mShowDefault,mShowSilent;
     private Uri mExistingUri, mDefaultUri;
@@ -54,7 +55,8 @@ public class TonePicker extends ListActivity
         mShowDefault = mInitialIntent.getBooleanExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         mShowSilent = mInitialIntent.getBooleanExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
 
-        mIntent = new Intent(Intent.ACTION_GET_CONTENT) .setType("audio/*") .addCategory(Intent.CATEGORY_OPENABLE);
+        mContentIntent = new Intent(Intent.ACTION_GET_CONTENT) .setType("audio/*") .addCategory(Intent.CATEGORY_OPENABLE);
+        mPickerIntent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER).putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
 
         mSilentString = getString(R.string.silentLabel);
 
@@ -75,10 +77,11 @@ public class TonePicker extends ListActivity
 
         mPackageManager = getPackageManager();
 
-        //mList.add( getString(R.string.audiosources) );
-        mList.addAll( getActivities(mIntent, null) );
-        //mList.add( getString(R.string.otherpickers) );
-        mList.addAll( getActivities(new Intent(RingtoneManager.ACTION_RINGTONE_PICKER), getComponentName()) );
+        mList.addAll( getActivities(mContentIntent, null) );
+
+        mFirstPickerPos = mList.size();
+
+        mList.addAll( getActivities(mPickerIntent, getComponentName()) );
 
         final LayoutInflater inflate = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
@@ -139,9 +142,10 @@ public class TonePicker extends ListActivity
         final Class cls = o.getClass();
         if (cls.equals(ResolveInfo.class)) {
           ResolveInfo ri = (ResolveInfo)o;
-          mIntent.setComponent( new ComponentName(ri.activityInfo.applicationInfo.packageName, ri.activityInfo.name) );
-          startActivityForResult(mIntent, REQUEST_GET_CONTENT);
-          return;
+          Intent i = (position < mFirstPickerPos) ? mContentIntent : mPickerIntent;
+
+          i.setComponent( new ComponentName(ri.activityInfo.applicationInfo.packageName, ri.activityInfo.name) );
+          startActivityForResult(i, REQUEST_GET_CONTENT);
         }
 
         Uri uri = null;
