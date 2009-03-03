@@ -18,20 +18,24 @@ import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.provider.Settings;
 
 public class TonePickerSplash extends Activity
 {
-    public static final int REQUEST_TRY = 42;
+    public static final int REQUEST_RINGTONE = 42;
+    public static final int REQUEST_NOTIFICATION = 43;
 
     private AudioManager mManager;
-    private MediaPlayer mPlayer;
+    //private MediaPlayer mPlayer;
     private MenuItem mAboutItem;
 
+/*
     @Override
     public void onPause() {
         super.onPause();
         stop_media();
     }
+    */
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -51,28 +55,49 @@ public class TonePickerSplash extends Activity
         tv.setText( getString(R.string.splash_title, getString(R.string.app_version)));
 
         Button button;
-        button = (Button) findViewById(R.id.splash_button_try);
+
+        button = (Button) findViewById(R.id.splash_button_ringtone);
         button.setOnClickListener(new Button.OnClickListener() {
           public void onClick(View v) {
             Intent i = new Intent(android.media.RingtoneManager.ACTION_RINGTONE_PICKER);
-            startActivityForResult(i, REQUEST_TRY);
+            startActivityForResult(i, REQUEST_RINGTONE);
           }
         });
+        button = (Button) findViewById(R.id.splash_button_notification);
+        button.setOnClickListener(new Button.OnClickListener() {
+          public void onClick(View v) {
+            Intent i = new Intent(android.media.RingtoneManager.ACTION_RINGTONE_PICKER);
+            startActivityForResult(i, REQUEST_NOTIFICATION);
+          }
+        });
+
+
         button = (Button) findViewById(R.id.splash_button_ok);
         button.setOnClickListener(new Button.OnClickListener() { public void onClick(View v) { finish(); } });
 
+/*
         button = (Button) findViewById(R.id.splash_button_stop);
         button.setOnClickListener(new Button.OnClickListener() { public void onClick(View v) { stop_media(); } });
         button.setVisibility( mManager.isMusicActive() ? View.VISIBLE : View.INVISIBLE );
+        */
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       if (resultCode != RESULT_OK || data == null) return;
-      if (requestCode == REQUEST_TRY) {
-        Uri u = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
-        if (u == null) return;
+      Uri u = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
+      if (u == null) return;
+
+      if (requestCode == REQUEST_RINGTONE) {
+        Settings.System.putString(getContentResolver(), Settings.System.RINGTONE, u.toString());
+      }
+      else
+      if (requestCode == REQUEST_NOTIFICATION) {
+        Settings.System.putString(getContentResolver(), Settings.System.NOTIFICATION_SOUND, u.toString());
+      }
+
+        /*
         mPlayer = new MediaPlayer();
         try {
             mPlayer.setDataSource(this, u);
@@ -86,9 +111,11 @@ public class TonePickerSplash extends Activity
             View v = findViewById(R.id.splash_button_stop);
             v.setVisibility(View.VISIBLE);
         } catch (java.io.IOException e) { }
-      }
-    }
+       */
 
+    }
+ 
+        /*
     private void stop_media()
     {
         if (mPlayer != null) {
@@ -99,6 +126,7 @@ public class TonePickerSplash extends Activity
         View v = findViewById(R.id.splash_button_stop);
         if (v != null) v.setVisibility(View.INVISIBLE);
     }
+        */
 
     private void initVolumeSlider(int seekbar_id, int stream_id)
     {

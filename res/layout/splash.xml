@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent" 
+      android:layout_height="fill_parent"
+      >
+<LinearLayout 
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
+
+
+
+
     <TextView android:id="@+id/splash_title"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
@@ -20,28 +28,34 @@
         />
 
 
+
     <RelativeLayout android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         >
-      <Button android:id="@+id/splash_button_try"
+
+
+      <Button android:id="@+id/splash_button_ringtone"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:text="@string/splash_button_try_label"
+        android:text="@string/splash_button_label_ringtone"
         android:padding="12sp"
         android:paddingLeft="16sp"
         android:paddingRight="16sp"
         android:layout_alignParentLeft="true"
         />
-      <Button android:id="@+id/splash_button_stop"
+
+
+      <Button android:id="@+id/splash_button_notification"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:text="@string/splash_button_stop_label"
+        android:text="@string/splash_button_label_notification"
         android:padding="8sp"
         android:layout_centerHorizontal="true"
-	android:visibility="invisible"
         />
+
+
       <Button android:id="@+id/splash_button_ok"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -54,13 +68,12 @@
     </RelativeLayout>
 
 
-
     <LinearLayout android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-	android:layout_marginLeft="20sp"
-	android:layout_marginRight="20sp"
-	>
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        >
       <SeekBar android:id="@+id/volume_ringer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
@@ -68,7 +81,7 @@
         android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:text="@string/volume_ringer"
         android:gravity="center"
-	android:paddingBottom="12sp"
+        android:paddingBottom="12sp"
         />
 
       <SeekBar android:id="@+id/volume_music"
@@ -78,7 +91,7 @@
         android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:text="@string/volume_music"
         android:gravity="center"
-	android:paddingBottom="12sp"
+        android:paddingBottom="12sp"
         />
 
       <SeekBar android:id="@+id/volume_call"
@@ -88,7 +101,7 @@
         android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:text="@string/volume_call"
         android:gravity="center"
-	android:paddingBottom="12sp"
+        android:paddingBottom="12sp"
         />
 
       <SeekBar android:id="@+id/volume_system"
@@ -98,7 +111,7 @@
         android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:text="@string/volume_system"
         android:gravity="center"
-	android:paddingBottom="12sp"
+        android:paddingBottom="12sp"
         />
 
       <SeekBar android:id="@+id/volume_alarm"
@@ -111,6 +124,6 @@
         />
     </LinearLayout>
 
-
 </LinearLayout>
 
+  </ScrollView>

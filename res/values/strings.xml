@@ -17,9 +17,9 @@
     <string name="volume_alarm">Alarm Volume</string>
     <string name="volume_system">System Sound Volume</string>
 
-    <string name="splash_button_try_label">Pick a ringtone</string>
-    <string name="splash_button_ok_label">OK</string>
-    <string name="splash_button_stop_label">Stop</string>
+    <string name="splash_button_label_ringtone">Ringtone</string>
+    <string name="splash_button_label_notification">Notification Sound</string>
+    <string name="splash_button_ok_label">Dismiss</string>
 
     <string name="about_title">About Tone Picker</string>
     <string name="about">About</string>
