@@ -29,6 +29,8 @@ import android.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.android.rings_extended.MusicPicker;
+
 public class TonePicker extends ListActivity
 {
     public static final int REQUEST_GET_CONTENT=1;
@@ -77,7 +79,10 @@ public class TonePicker extends ListActivity
 
         mPackageManager = getPackageManager();
 
-        mList.addAll( getActivities(mContentIntent, null) );
+        
+        mList.addAll( mPackageManager.queryIntentActivities(new Intent(this, MusicPicker.class), 0) );
+
+        mList.addAll( getActivities(mContentIntent, getComponentName()) );
 
         mFirstPickerPos = mList.size();
 
@@ -107,10 +112,10 @@ public class TonePicker extends ListActivity
               Ringtone tone = (Ringtone)o;
               String title = tone.getTitle(TonePicker.this);
               if (tone.equals(mExistingTone)) {
-                txtmain.setText( R.string.existingtone );
+                txtmain.setText( R.string.existingRingtoneLabel );
               }
               else if (tone.equals(mDefaultTone)) {
-                txtmain.setText( R.string.defaulttone );
+                txtmain.setText( R.string.defaultRingtoneLabel );
               }
               txtinfo.setText( title );
             }
@@ -221,7 +226,7 @@ public class TonePicker extends ListActivity
                 AlertDialog dia = new AlertDialog.Builder(this).
                                     setTitle(R.string.about_title).
                                     setView(v).
-                                    setPositiveButton(R.string.splash_button_ok_label,null).
+                                    setPositiveButton(android.R.string.ok,null).
                                     create();
                 dia.show();
         }

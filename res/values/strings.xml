@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
     <string name="app_name">Tone Picker</string>
     <string name="app_description">MP3 Ringtone Picker</string>
-    <string name="app_version">0.9.2.1</string>
-    <string name="splash_title">Tone Picker v%s</string>
-    <string name="splash_body">When applications need a ringtone they call RINGTONE PICKER.  Use Tone Picker to set Music/MP3s for SMS, IM, Email, Ringtone, Notification, Alarms, Calendar,  whatever.</string>
+    <string name="app_version">v1.0</string>
+
     <string name="app_about"><b>Based heavily on Rings Extended</b>\nwritten by <u>Dianne Hackborn</u>\n\n
     <b>Source code available</b>\n<u>http://github.com/lithium/tonepicker</u>\n\n
     Published by Hlidskialf Software\n\n
@@ -17,20 +15,11 @@
     <string name="volume_alarm">Alarm Volume</string>
     <string name="volume_system">System Sound Volume</string>
 
-    <string name="splash_button_label_ringtone">Set Ringtone</string>
-    <string name="splash_button_label_notification">Set Notification</string>
-    <string name="splash_button_ok_label">Dismiss</string>
+    <string name="splash_button_label_ringtone">Default Ringtone</string>
+    <string name="splash_button_label_notification">Default Notification</string>
 
     <string name="about_title">About Tone Picker</string>
     <string name="about">About</string>
-
-
-
-    <string name="picker_title">Tone Picker will show installed mp3s</string>
-    <string name="existingtone">Current Ringtone</string>
-    <string name="defaulttone">Default Ringtone</string>
-    <string name="audiosources">-- Audio Sources --</string>
-    <string name="otherpickers">-- Other Ringtone Pickers --</string>
 
 
     <!-- from rings extended strings.xml -->

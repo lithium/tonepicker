@@ -52,6 +52,7 @@
             <ListView android:id="@android:id/list"
                     android:layout_width="fill_parent" 
                     android:layout_height="fill_parent"
+                    android:cacheColorHint="#00000000"
                     android:drawSelectorOnTop="false"/>
             <TextView android:id="@android:id/empty"
                     android:layout_width="fill_parent"
@@ -64,7 +65,26 @@
         </com.example.android.rings_extended.FastScrollView>
         
     </FrameLayout>
-    
+   
+
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      >
+      <Button android:id="@+id/okayButton"
+        android:text="@android:string/ok"
+        android:layout_height="wrap_content"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        />
+      <Button android:id="@+id/cancelButton"
+        android:text="@android:string/cancel"
+        android:layout_height="wrap_content"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        />
+    </LinearLayout>
+    <!--
     <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="?android:attr/listPreferredItemHeight"
@@ -87,5 +107,6 @@
                 android:minWidth="120dip"
                 android:minHeight="48dip" />
     </RelativeLayout>
+    -->
         
 </LinearLayout>

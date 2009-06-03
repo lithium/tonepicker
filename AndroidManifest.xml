@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.hlidskialf.android.tonepicker"
-      android:versionCode="9201"
-      android:versionName="0.9.2.1">
+      android:versionCode="100000"
+      android:versionName="1.0">
 
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <application android:label="@string/app_name"
-		 android:icon="@drawable/tonepicker">
+                 android:icon="@drawable/tonepicker">
+
         <activity android:name=".TonePickerSplash"
                   android:label="@string/app_name"
-		  android:icon="@drawable/tonepicker">
+                  android:theme="@android:style/Theme.Dialog"
+                  android:icon="@drawable/tonepicker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".TonePicker" android:label="@string/app_name"
-		  android:icon="@drawable/tonepicker">
+        <activity android:name=".TonePicker" 
+                  android:label="@string/app_name"
+                  android:theme="@android:style/Theme.Dialog"
+                  android:icon="@drawable/tonepicker">
             <intent-filter>
                 <action android:name="android.intent.action.RINGTONE_PICKER" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -28,8 +32,9 @@
 
         <!-- MusicPicker activity from Rings Extended -->
         <activity android:name="com.example.android.rings_extended.MusicPicker" 
-		  android:label="@string/musicPickerName"
-		  android:icon="@drawable/tonepicker">
+                  android:label="@string/musicPickerName"
+                  android:theme="@android:style/Theme.Dialog"
+                  android:icon="@drawable/tonepicker">
             <!-- First way to invoke us: someone asks to get content of
                  any of the audio types we support. -->
             <intent-filter>
