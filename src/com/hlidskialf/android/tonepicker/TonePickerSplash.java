@@ -98,27 +98,17 @@ public class TonePickerSplash extends Activity
   {
     final int stream = stream_id;
     SeekBar sb = (SeekBar)findViewById(seekbar_id);
-    sb.setProgress( volumeToProgress(mAudioManager, stream) );
+    sb.setMax( mAudioManager.getStreamMaxVolume(stream_id) );
+    sb.setProgress( mAudioManager.getStreamVolume(stream_id) );
     sb.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged(SeekBar sb, int progress, boolean touch) {
-        int vol = (progress >= 98) ? mAudioManager.getStreamMaxVolume(stream) : 
-                                     progressToVolume(mAudioManager, stream, progress) ;
-
-        if (vol != mAudioManager.getStreamVolume(stream) ) {
-          mAudioManager.setStreamVolume(stream, vol, AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
+        if (progress != mAudioManager.getStreamVolume(stream) ) {
+          mAudioManager.setStreamVolume(stream, progress, AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
         }
       }
       public void onStartTrackingTouch(SeekBar sb) {}
       public void onStopTrackingTouch(SeekBar sb) {}
     });
-  }
-  private static int volumeToProgress(AudioManager mgr, int stream)
-  {
-    return (int)(((float)mgr.getStreamVolume(stream) / (float)mgr.getStreamMaxVolume(stream)) * 100);
-  }
-  private static int progressToVolume(AudioManager mgr, int stream, int progress)
-  {
-    return (int)((float)mgr.getStreamMaxVolume(stream) *( (float)progress/(float)100));
   }
 
   @Override
