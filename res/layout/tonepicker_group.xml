@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+    >
+
+    <TextView android:id="@android:id/text1"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="-1"
+        android:singleLine="true"
+        android:gravity="center_vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+</LinearLayout>

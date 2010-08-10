@@ -43,7 +43,7 @@ public class TonePickerSplash extends Activity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.splash);
-    
+
     mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
     initVolumeSlider(R.id.volume_ringer, R.id.volume_text_ringer, AudioManager.STREAM_RING);
@@ -51,10 +51,10 @@ public class TonePickerSplash extends Activity
     initVolumeSlider(R.id.volume_call, R.id.volume_text_call, AudioManager.STREAM_VOICE_CALL);
     initVolumeSlider(R.id.volume_system, R.id.volume_text_system, AudioManager.STREAM_SYSTEM);
     initVolumeSlider(R.id.volume_alarm, R.id.volume_text_alarm, AudioManager.STREAM_ALARM);
-    if (Build.VERSION.SDK_INT >= 3) {
+    if (Integer.valueOf(Build.VERSION.SDK) >= 3) {
       initVolumeSlider(R.id.volume_notify, R.id.volume_text_notify, AudioManager.STREAM_NOTIFICATION);
     }
-    if (Build.VERSION.SDK_INT >= 5) {
+    if (Integer.valueOf(Build.VERSION.SDK) >= 5) {
       initVolumeSlider(R.id.volume_dtmf, R.id.volume_text_dtmf, AudioManager.STREAM_DTMF);
     }
 
@@ -72,7 +72,7 @@ public class TonePickerSplash extends Activity
     button.setTag(new ViewHolder(existing, REQUEST_NOTIFICATION));
     button.setOnClickListener(this);
 
-    if (Build.VERSION.SDK_INT >= 5) {
+    if (Integer.valueOf(Build.VERSION.SDK) >= 5) {
       existing = Settings.System.getString(getContentResolver(), Settings.System.ALARM_ALERT);
       button = (Button) findViewById(R.id.splash_button_alarm);
       button.setVisibility(View.VISIBLE);
