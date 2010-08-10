@@ -9,14 +9,17 @@
     Published by Hlidskialf Software\n\n
     No warranty of any kind provided.\nNo affiliation with above parties implied.</string>
 
-    <string name="volume_ringer">Ringer Volume</string>
-    <string name="volume_music">Music Volume</string>
-    <string name="volume_call">Call Volume</string>
-    <string name="volume_alarm">Alarm Volume</string>
-    <string name="volume_system">System Sound Volume</string>
+    <string name="volume_ringer">Ring</string>
+    <string name="volume_music">Music</string>
+    <string name="volume_call">Call</string>
+    <string name="volume_alarm">Alarm</string>
+    <string name="volume_system">System</string>
+    <string name="volume_notify">Notification</string>
+    <string name="volume_dtmf">Touch Tone</string>
 
-    <string name="splash_button_label_ringtone">Default Ringtone</string>
-    <string name="splash_button_label_notification">Default Notification</string>
+    <string name="splash_button_label_ringtone">Ringtone</string>
+    <string name="splash_button_label_notification">Notification</string>
+    <string name="splash_button_label_alarm">Alarm</string>
 
     <string name="about_title">About Tone Picker</string>
     <string name="about">About</string>

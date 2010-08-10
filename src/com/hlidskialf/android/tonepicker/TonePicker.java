@@ -57,8 +57,13 @@ public class TonePicker extends ListActivity
         mShowDefault = mInitialIntent.getBooleanExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         mShowSilent = mInitialIntent.getBooleanExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true);
 
+        int ringtone_type = mInitialIntent.getIntExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
+      
+
         mContentIntent = new Intent(Intent.ACTION_GET_CONTENT) .setType("audio/*") .addCategory(Intent.CATEGORY_OPENABLE);
-        mPickerIntent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER).putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
+        mPickerIntent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        mPickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, ringtone_type);
+
 
         mSilentString = getString(R.string.silentLabel);
 

@@ -3,6 +3,7 @@ package com.hlidskialf.android.tonepicker;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.Build;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -18,12 +19,24 @@ import android.view.MenuItem;
 import android.provider.Settings;
 
 public class TonePickerSplash extends Activity
+                  implements Button.OnClickListener
 {
   public static final int REQUEST_RINGTONE = 42;
   public static final int REQUEST_NOTIFICATION = 43;
+  public static final int REQUEST_ALARM = 44;
 
   private AudioManager mAudioManager;
   private MenuItem mAboutItem;
+
+  private class ViewHolder
+  {
+    String existing_uri;
+    int request_code;
+    public ViewHolder(String existing_uri, int request_code) { 
+      this.existing_uri = existing_uri;
+      this.request_code = request_code;
+    }
+  }
 
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -33,47 +46,52 @@ public class TonePickerSplash extends Activity
     
     mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
-    initVolumeSlider(R.id.volume_ringer, AudioManager.STREAM_RING);
-    initVolumeSlider(R.id.volume_music, AudioManager.STREAM_MUSIC);
-    initVolumeSlider(R.id.volume_call, AudioManager.STREAM_VOICE_CALL);
-    initVolumeSlider(R.id.volume_system, AudioManager.STREAM_SYSTEM);
-    initVolumeSlider(R.id.volume_alarm, AudioManager.STREAM_ALARM);
+    initVolumeSlider(R.id.volume_ringer, R.id.volume_text_ringer, AudioManager.STREAM_RING);
+    initVolumeSlider(R.id.volume_music, R.id.volume_text_music, AudioManager.STREAM_MUSIC);
+    initVolumeSlider(R.id.volume_call, R.id.volume_text_call, AudioManager.STREAM_VOICE_CALL);
+    initVolumeSlider(R.id.volume_system, R.id.volume_text_system, AudioManager.STREAM_SYSTEM);
+    initVolumeSlider(R.id.volume_alarm, R.id.volume_text_alarm, AudioManager.STREAM_ALARM);
+    if (Build.VERSION.SDK_INT >= 3) {
+      initVolumeSlider(R.id.volume_notify, R.id.volume_text_notify, AudioManager.STREAM_NOTIFICATION);
+    }
+    if (Build.VERSION.SDK_INT >= 5) {
+      initVolumeSlider(R.id.volume_dtmf, R.id.volume_text_dtmf, AudioManager.STREAM_DTMF);
+    }
 
-    //TextView tv = (TextView)findViewById(R.id.splash_title);
-    //tv.setText( getString(R.string.splash_title, getString(R.string.app_version)));
 
     Button button;
+    String existing;
 
+    existing = Settings.System.getString(getContentResolver(), Settings.System.RINGTONE);
     button = (Button) findViewById(R.id.splash_button_ringtone);
-    button.setOnClickListener(new Button.OnClickListener() {
-      public void onClick(View v) {
-        Intent i = new Intent(android.media.RingtoneManager.ACTION_RINGTONE_PICKER);
-        String existing = Settings.System.getString(getContentResolver(), Settings.System.RINGTONE);
-        if (existing != null) 
-          i.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(existing));
-        i.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
-        startActivityForResult(i, REQUEST_RINGTONE);
-      }
-    });
+    button.setTag(new ViewHolder(existing, REQUEST_RINGTONE));
+    button.setOnClickListener(this);
+
+    existing = Settings.System.getString(getContentResolver(), Settings.System.NOTIFICATION_SOUND);
     button = (Button) findViewById(R.id.splash_button_notification);
-    button.setOnClickListener(new Button.OnClickListener() {
-      public void onClick(View v) {
-        Intent i = new Intent(android.media.RingtoneManager.ACTION_RINGTONE_PICKER);
-        String existing = Settings.System.getString(getContentResolver(), Settings.System.NOTIFICATION_SOUND);
-        if (existing != null) 
-          i.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(existing));
-        i.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
-        startActivityForResult(i, REQUEST_NOTIFICATION);
-      }
-    });
+    button.setTag(new ViewHolder(existing, REQUEST_NOTIFICATION));
+    button.setOnClickListener(this);
 
-/*
-    button = (Button) findViewById(R.id.splash_button_ok);
-    button.setOnClickListener(new Button.OnClickListener() { 
-      public void onClick(View v) { finish(); } 
-    });
-    */
+    if (Build.VERSION.SDK_INT >= 5) {
+      existing = Settings.System.getString(getContentResolver(), Settings.System.ALARM_ALERT);
+      button = (Button) findViewById(R.id.splash_button_alarm);
+      button.setVisibility(View.VISIBLE);
+      button.setTag(new ViewHolder(existing, REQUEST_ALARM));
+      button.setOnClickListener(this);
+    }
 
+  }
+
+  /*Button.OnClickListener*/
+  public void onClick(View v) {
+    ViewHolder vh = (ViewHolder)v.getTag();
+
+    Intent i = new Intent(android.media.RingtoneManager.ACTION_RINGTONE_PICKER);
+    if (vh.existing_uri != null) 
+      i.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(vh.existing_uri));
+    i.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
+    i.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
+    startActivityForResult(i, vh.request_code);
   }
 
   @Override
@@ -94,16 +112,19 @@ public class TonePickerSplash extends Activity
     }
   }
 
-  private void initVolumeSlider(int seekbar_id, int stream_id)
+  private void initVolumeSlider(int seekbar_id, int label_id, int stream_id)
   {
     final int stream = stream_id;
+    TextView tv = (TextView)findViewById(label_id);
+    tv.setVisibility(View.VISIBLE);
     SeekBar sb = (SeekBar)findViewById(seekbar_id);
+    sb.setVisibility(View.VISIBLE);
     sb.setMax( mAudioManager.getStreamMaxVolume(stream_id) );
     sb.setProgress( mAudioManager.getStreamVolume(stream_id) );
     sb.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged(SeekBar sb, int progress, boolean touch) {
         if (progress != mAudioManager.getStreamVolume(stream) ) {
-          mAudioManager.setStreamVolume(stream, progress, AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
+          mAudioManager.setStreamVolume(stream, progress, AudioManager.FLAG_SHOW_UI);
         }
       }
       public void onStartTrackingTouch(SeekBar sb) {}
