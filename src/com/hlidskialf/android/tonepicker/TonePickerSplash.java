@@ -110,6 +110,10 @@ public class TonePickerSplash extends Activity
     if (requestCode == REQUEST_NOTIFICATION) {
       Settings.System.putString(getContentResolver(), Settings.System.NOTIFICATION_SOUND, u.toString());
     }
+    else
+    if (requestCode == REQUEST_ALARM) {
+      Settings.System.putString(getContentResolver(), Settings.System.ALARM_ALERT, u.toString());
+    }
   }
 
   private void initVolumeSlider(int seekbar_id, int label_id, int stream_id)
