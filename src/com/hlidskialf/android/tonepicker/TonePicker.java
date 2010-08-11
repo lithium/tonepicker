@@ -73,7 +73,7 @@ public class TonePicker extends ExpandableListActivity
 
     mInflater = getLayoutInflater();
     mListView = getExpandableListView();
-    mListView.setItemsCanFocus(false);
+    mListView.setItemsCanFocus(true);
     mListView.setChoiceMode(ExpandableListView.CHOICE_MODE_SINGLE);
 
 
@@ -84,16 +84,17 @@ public class TonePicker extends ExpandableListActivity
     if (default_uri != null) {
       mHeaderDefault = _add_static_view(getString(R.string.default_ringtone), default_uri);
     }
-    mFooterOthers = (TextView)mInflater.inflate(R.layout.tonepicker_footer,null);
+    View v = mInflater.inflate(R.layout.tonepicker_footer,null);
+    mFooterOthers = (TextView)v.findViewById(android.R.id.text1);
     mFooterOthers.setText(R.string.other_apps);
-    mFooterOthers.setOnClickListener(new View.OnClickListener() {
+    v.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Intent intent = new Intent(TonePicker.this, OtherIntentPicker.class);
           startActivityForResult(intent, REQUEST_GET_CONTENT);
           return;
         }
     });
-    mListView.addFooterView(mFooterOthers, null, true);
+    mListView.addFooterView(v, null, true);
 
 
     mAdapter = new TonePickerAdapter(this);
@@ -170,7 +171,7 @@ public class TonePicker extends ExpandableListActivity
     if (resultCode != RESULT_OK) return;
 
     if (requestCode == REQUEST_GET_CONTENT) {
-      Uri uri =  data == null ? null : data.getData();
+      Uri uri = data == null ? null : data.getData();
       if (uri == null) {
         uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
       }

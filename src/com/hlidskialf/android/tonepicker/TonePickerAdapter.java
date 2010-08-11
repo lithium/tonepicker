@@ -120,7 +120,7 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
       tone.uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
       String track = mCursor.getString(mColIdx_track_track);
       String name = mCursor.getString(mColIdx_track_title);
-      if (track != null && track.length() > 0) {
+      if (track != null && track.length() > 0 && Integer.valueOf(track) > 0) {
         tone.name = track + ". " + name;
       }
       else
