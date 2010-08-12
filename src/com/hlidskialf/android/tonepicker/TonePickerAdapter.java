@@ -280,9 +280,11 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
       MediaStore.Audio.Albums.ARTIST,
       MediaStore.Audio.Albums.ALBUM,
     }, null, null, MediaStore.Audio.Albums.ARTIST+","+MediaStore.Audio.Albums.ALBUM);
-    mColIdx_album_artist = cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST);
-    mColIdx_album_album = cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM);
-    mColIdx_album_album_id = cursor.getColumnIndex(MediaStore.Audio.Albums._ID);
+    if (cursor != null) {
+      mColIdx_album_artist = cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST);
+      mColIdx_album_album = cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM);
+      mColIdx_album_album_id = cursor.getColumnIndex(MediaStore.Audio.Albums._ID);
+    }
     return cursor;
   }
 

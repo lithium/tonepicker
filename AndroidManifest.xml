@@ -13,7 +13,7 @@
 
         <activity android:name=".TonePickerSplash"
                   android:label="@string/app_name"
-                  android:theme="@android:style/Theme.Dialog"
+                  android:theme="@android:style/Theme.NoTitleBar"
                   android:icon="@drawable/tonepicker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,7 @@
 
         <activity android:name=".TonePicker" 
                   android:label="@string/app_name"
+                  android:theme="@android:style/Theme.NoTitleBar"
                   android:icon="@drawable/tonepicker">
             <intent-filter>
                 <action android:name="android.intent.action.RINGTONE_PICKER" />
@@ -30,7 +31,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".OtherIntentPicker"/>
+        <activity android:name=".OtherIntentPicker"
+                  android:theme="@android:style/Theme.NoTitleBar"
+                  />
 
     </application>
 </manifest> 
