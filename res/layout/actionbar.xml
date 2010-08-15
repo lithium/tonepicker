@@ -8,10 +8,18 @@
       android:background="@drawable/ic_actionbg_tonepicker"
       >
 
+      <ImageView android:id="@+id/actionbar_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:src="@drawable/ic_actionlogo_tonepicker"
+      />
+
       <ImageView android:id="@+id/actionbar_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_gravity="center"
         android:src="@drawable/ic_actiontitle_tonepicker"
         />
