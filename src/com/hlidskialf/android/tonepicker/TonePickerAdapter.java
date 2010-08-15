@@ -295,7 +295,7 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
 
   private MediaToneCursor _get_track_cursor(int position)
   {
-    MediaToneCursor tc;
+    MediaToneCursor tc = null;
 
     if (mCursor_tracks.containsKey(position)) {
       tc = (MediaToneCursor)mCursor_tracks.get(position);
@@ -310,12 +310,14 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
         MediaStore.Audio.Media.TITLE,
         MediaStore.Audio.Media.TRACK
       }, where.toString(), new String[] { String.valueOf(album_id) }, MediaStore.Audio.Media.TRACK);
-      tc = new MediaToneCursor(cursor);
-      mCursor_tracks.put(position, tc);
+      if (cursor != null) {
+        tc = new MediaToneCursor(cursor);
+        mCursor_tracks.put(position, tc);
 
-      mColIdx_track_title = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-      mColIdx_track_track = cursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
-      mColIdx_track_id = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
+        mColIdx_track_title = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
+        mColIdx_track_track = cursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
+        mColIdx_track_id = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
+      }
     }
 
     return tc;
