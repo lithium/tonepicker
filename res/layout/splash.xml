@@ -63,19 +63,20 @@
           android:layout_height="wrap_content"/>
       </TableRow>
 
-      <TableRow android:layout_marginBottom="20dp">
+      <TableRow android:id="@+id/row_notify"
+        android:visibility="gone"
+        android:layout_marginBottom="20dp"
+        >
         <TextView android:id="@+id/volume_text_notify"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content"
           android:text="@string/volume_notify"
           android:gravity="left"
-          android:visibility="gone"
           />
         <SeekBar android:id="@+id/volume_notify"
           android:layout_marginLeft="5sp"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
-          android:visibility="gone"
           />
       </TableRow>
 
@@ -131,19 +132,20 @@
           android:layout_height="wrap_content"/>
       </TableRow>
 
-      <TableRow>
+      <TableRow android:id="@+id/row_dtmf"
+        android:visibility="gone"
+        android:layout_marginBottom="20dp"
+        >
         <TextView android:id="@+id/volume_text_dtmf"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content"
           android:text="@string/volume_dtmf"
           android:gravity="left"
-          android:visibility="gone"
           />
         <SeekBar android:id="@+id/volume_dtmf"
           android:layout_marginLeft="5sp"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
-          android:visibility="gone"
           />
       </TableRow>
 

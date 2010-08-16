@@ -52,9 +52,13 @@ public class TonePickerSplash extends Activity
     initVolumeSlider(R.id.volume_system, R.id.volume_text_system, AudioManager.STREAM_SYSTEM);
     initVolumeSlider(R.id.volume_alarm, R.id.volume_text_alarm, AudioManager.STREAM_ALARM);
     if (Integer.valueOf(Build.VERSION.SDK) >= 3) {
+      View v = findViewById(R.id.row_notify);
+      v.setVisibility(View.VISIBLE); 
       initVolumeSlider(R.id.volume_notify, R.id.volume_text_notify, AudioManager.STREAM_NOTIFICATION);
     }
     if (Integer.valueOf(Build.VERSION.SDK) >= 5) {
+      View v = findViewById(R.id.row_dtmf);
+      v.setVisibility(View.VISIBLE); 
       initVolumeSlider(R.id.volume_dtmf, R.id.volume_text_dtmf, AudioManager.STREAM_DTMF);
     }
 
@@ -120,9 +124,7 @@ public class TonePickerSplash extends Activity
   {
     final int stream = stream_id;
     TextView tv = (TextView)findViewById(label_id);
-    tv.setVisibility(View.VISIBLE);
     SeekBar sb = (SeekBar)findViewById(seekbar_id);
-    sb.setVisibility(View.VISIBLE);
     sb.setMax( mAudioManager.getStreamMaxVolume(stream_id) );
     sb.setProgress( mAudioManager.getStreamVolume(stream_id) );
     sb.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
