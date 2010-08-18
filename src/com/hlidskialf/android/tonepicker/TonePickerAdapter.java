@@ -14,6 +14,7 @@ import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
   private ContentResolver mContentResolver;
   private boolean mShowSlots;
   private long mSelectedId=-1;
+  private boolean mStorageMounted=false;
 
   private static final String[] BUILTIN_NAMES = new String[] { "Ringtones","Notifications","Alarms", };
 
@@ -157,7 +159,9 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
     mCursor_ring = _builtin_cursor(RingtoneManager.TYPE_RINGTONE);
     mCursor_notify = _builtin_cursor(RingtoneManager.TYPE_NOTIFICATION);
     mCursor_alarm = _builtin_cursor(RingtoneManager.TYPE_ALARM);
-    mCursor_album = _album_cursor();
+
+    //mCursor_album = _album_cursor();
+    refreshStorage();
   }
 
   public boolean isChildSelectable(int groupPosition, int childPosition) 
@@ -337,6 +341,27 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
       name = artist + " / " + album;
     }
     return name;
+  }
+
+  public void refreshStorage() 
+  {
+    _check_mounted_state();
+    mCursor_album = null;
+    if (mStorageMounted) {
+      mCursor_album = _album_cursor();
+    }
+  }
+  private void _check_mounted_state()
+  {
+    String state = Environment.getExternalStorageState();
+    if (Environment.MEDIA_MOUNTED.equals(state)) {
+      //mount
+      mStorageMounted = true;
+    }
+    else {
+      //unmount
+      mStorageMounted = false;
+    }
   }
 
 }

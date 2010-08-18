@@ -1,8 +1,10 @@
 package com.hlidskialf.android.tonepicker;
 
 import android.app.ExpandableListActivity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -214,4 +216,41 @@ public class TonePicker extends ExpandableListActivity
     super.onDestroy();
     stopRingtone();
   }
+
+
+  BroadcastReceiver mMountReceiver = new BroadcastReceiver()
+  {
+    public void onReceive(Context context, Intent intent) {
+      if (mAdapter != null) {
+        mAdapter.refreshStorage();
+        mListView.invalidateViews();
+      }
+    }
+  };
+
+  @Override
+  public void onResume()
+  {
+    super.onResume();
+    IntentFilter filter = new IntentFilter();
+    filter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
+    filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
+    filter.addDataScheme("file");
+    registerReceiver(mMountReceiver, filter);
+    if (mAdapter != null) {
+      mAdapter.refreshStorage();
+      mListView.invalidateViews();
+    }
+  }
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    if (mMountReceiver != null) {
+      unregisterReceiver(mMountReceiver);
+    }
+  }
+
+
+
 }
