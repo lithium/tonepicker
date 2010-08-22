@@ -41,7 +41,7 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
   private long mSelectedId=-1;
   private boolean mStorageMounted=false;
 
-  private static final String[] BUILTIN_NAMES = new String[] { "Ringtones","Notifications","Alarms", };
+  private String[] BUILTIN_NAMES;
 
   private static int INDEX_SLOTS;
   private static int INDEX_FIRST_BUILTIN;
@@ -146,6 +146,16 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
     mContentResolver = mContext.getContentResolver();
     mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+
+    BUILTIN_NAMES = new String[] { 
+      mContext.getString(R.string.ringtones), 
+      mContext.getString(R.string.notifications), 
+      mContext.getString(R.string.alarms) 
+    };
+    
+    
+  
+
     mAlbumNames = new LinkedHashMap<Integer,String>();
     mCursor_tracks = new LinkedHashMap<Integer,ToneCursor>();
 
@@ -227,11 +237,6 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
     else
     if (groupPosition >= INDEX_FIRST_BUILTIN)
       text = BUILTIN_NAMES[groupPosition - INDEX_FIRST_BUILTIN];
-      /*
-    else
-    if (mShowSlots && groupPosition == INDEX_SLOTS)
-      text = getString("Bragi Slots";
-    */
     tv.setText(text);
 
     return convertView;

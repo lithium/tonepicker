@@ -30,6 +30,9 @@
     <string name="default_ringtone">Default</string>
     <string name="other_apps">Other Apps</string>
 
+    <string name="ringtones">Ringtones</string>
+    <string name="notifications">Notifications</string>
+    <string name="alarms">Alarms</string>
 
 
 </resources>
