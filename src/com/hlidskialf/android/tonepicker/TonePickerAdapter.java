@@ -70,7 +70,7 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
     CheckedTextView label;
   }
 
-  abstract class ToneCursor
+  abstract class ToneCursor extends Object
   {
     protected Cursor mCursor;
     private LinkedHashMap<Integer,Tone> mTones;
@@ -100,6 +100,8 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
     abstract protected Tone cacheTone(int position);
 
     public int getCount() { return mCursor.getCount(); }
+
+    protected void finalize() { if (mCursor != null) mCursor.close(); }
   }
 
   class BuiltinToneCursor extends ToneCursor
