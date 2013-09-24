@@ -2,12 +2,14 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Tone Picker</string>
     <string name="app_description">MP3 Ringtone Picker</string>
-    <string name="app_version">v1.0</string>
 
-    <string name="app_about"><b>Based heavily on Rings Extended</b>\nwritten by <u>Dianne Hackborn</u>\n\n
-    <b>Source code available</b>\n<u>http://github.com/lithium/tonepicker</u>\n\n
-    Published by Hlidskialf Software\n\n
-    No warranty of any kind provided.\nNo affiliation with above parties implied.</string>
+    <string name="app_about"><b>Code by Lithium</b>\n<u>http://github.com/lithium/tonepicker</u>\n\n
+
+    <b>Icon by Yoni Lopez</b> (CC BY 3.0 US)\n
+    <u>http://kiko11.deviantart.com/</u>\n\n
+
+    Published by Hlidskialf Software\n
+    No warranty of any kind provided.\n</string>
 
     <string name="volume_ringer">Ring</string>
     <string name="volume_music">Music</string>
@@ -30,9 +32,9 @@
     <string name="default_ringtone">Default</string>
     <string name="other_apps">Other Apps</string>
 
-    <string name="ringtones">Ringtones</string>
-    <string name="notifications">Notifications</string>
-    <string name="alarms">Alarms</string>
+    <string name="ringtones">System Ringtones</string>
+    <string name="notifications">System Notifications</string>
+    <string name="alarms">System Alarms</string>
 
 
 </resources>

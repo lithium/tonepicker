@@ -70,7 +70,7 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
     CheckedTextView label;
   }
 
-  abstract class ToneCursor extends Object
+  abstract class ToneCursor
   {
     protected Cursor mCursor;
     private LinkedHashMap<Integer,Tone> mTones;
@@ -345,7 +345,11 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
       mCursor_album.moveToPosition(position);
       String artist = mCursor_album.getString(mColIdx_album_artist);
       String album = mCursor_album.getString(mColIdx_album_album);
-      name = artist + " / " + album;
+      if (artist != null && !(artist.equals("<unknown>") || artist.isEmpty())) {
+          name = artist + " - " + album;
+      } else {
+          name = album;
+      }
     }
     return name;
   }
