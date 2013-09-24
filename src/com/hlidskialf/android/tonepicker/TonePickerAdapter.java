@@ -345,10 +345,10 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
       mCursor_album.moveToPosition(position);
       String artist = mCursor_album.getString(mColIdx_album_artist);
       String album = mCursor_album.getString(mColIdx_album_album);
-      if (artist != null && !(artist.equals("<unknown>") || artist.isEmpty())) {
-          name = artist + " - " + album;
-      } else {
+      if (TextUtils.isEmpty(artist) || artist.equals("<unknown>")) {
           name = album;
+      } else {
+          name = artist + " - " + album;
       }
     }
     return name;
