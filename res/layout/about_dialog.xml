@@ -9,18 +9,19 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       android:textSize="18sp"
-      android:text="@string/app_description"/>
+      android:text="@string/app_name"/>
     <TextView android:id="@+id/about_version"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:gravity="center"
       android:textSize="10sp"
-      android:text="@string/app_version"/>
+      android:text=".X.X"/>
     <TextView android:id="@+id/about_text"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:gravity="center"
       android:textSize="14sp"
+      android:layout_marginTop="16dp"
       android:text="@string/app_about"
     />
 </LinearLayout>

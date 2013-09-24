@@ -2,6 +2,8 @@ package com.hlidskialf.android.tonepicker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.Build;
 import android.widget.Button;
@@ -151,6 +153,8 @@ public class TonePickerSplash extends Activity
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.equals(mAboutItem)) {
       View v = getLayoutInflater().inflate(R.layout.about_dialog,null);
+      TextView version = (TextView)v.findViewById(R.id.about_version);
+      version.setText(getVersionName(this, this.getClass()));
       AlertDialog dia = new AlertDialog.Builder(this)
           .setTitle(R.string.about_title)
           .setView(v)
@@ -160,6 +164,15 @@ public class TonePickerSplash extends Activity
 
     return super.onOptionsItemSelected(item);
   }
- 
 
+    public static String getVersionName(Context context, Class cls)
+    {
+        try {
+            ComponentName comp = new ComponentName(context, cls);
+            PackageInfo pinfo = context.getPackageManager().getPackageInfo(comp.getPackageName(), 0);
+            return pinfo.versionName;
+        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+            return null;
+        }
+    }
 }

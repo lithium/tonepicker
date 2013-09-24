@@ -70,7 +70,7 @@ public class TonePickerAdapter extends BaseExpandableListAdapter {
     CheckedTextView label;
   }
 
-  abstract class ToneCursor extends Object
+  abstract class ToneCursor
   {
     protected Cursor mCursor;
     private LinkedHashMap<Integer,Tone> mTones;
