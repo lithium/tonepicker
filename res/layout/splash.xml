@@ -5,8 +5,6 @@
   android:layout_height="wrap_content"
   >
 
-  <include layout="@layout/actionbar"/>
-
   <LinearLayout android:id="@+id/button_bar"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -38,7 +36,7 @@
     android:layout_height="fill_parent"
     android:layout_above="@id/button_bar"
     android:layout_marginLeft="5sp"
-    android:paddingTop="72dp"
+    android:paddingTop="100dp"
     android:paddingLeft="5dp"
     >
     <TableLayout
