@@ -20,20 +20,26 @@
       android:layout_width="0dip" 
       android:layout_height="wrap_content" 
       android:layout_weight="1"
-      />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+
+        />
     <Button android:id="@+id/splash_button_notification"
       android:text="@string/splash_button_label_notification"
       android:layout_width="0dip" 
       android:layout_height="wrap_content" 
       android:layout_weight="1"
-      />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+
+        />
     <Button android:id="@+id/splash_button_alarm"
       android:text="@string/splash_button_label_alarm"
       android:layout_width="0dip" 
       android:layout_height="wrap_content" 
       android:layout_weight="1"
       android:visibility="gone"
-      />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+
+        />
   </LinearLayout>
 
   <ScrollView  
