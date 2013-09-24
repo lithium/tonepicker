@@ -130,7 +130,7 @@ public class TonePickerSplash extends Activity
     sb.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged(SeekBar sb, int progress, boolean touch) {
         if (progress != mAudioManager.getStreamVolume(stream) ) {
-          mAudioManager.setStreamVolume(stream, progress, AudioManager.FLAG_SHOW_UI);
+          mAudioManager.setStreamVolume(stream, progress, AudioManager.FLAG_PLAY_SOUND);
         }
       }
       public void onStartTrackingTouch(SeekBar sb) {}
